@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+use App\Task;    // add
+
+class TasksController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $tasks = Task::all();
+
+        return view('tasks.index', [
+            'tasks' => $tasks,
+        ]);
+    }
+
+// omission
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $task = new Task;
+
+        return view('task.create', [
+            'task' => $task,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $task = new Task;
+        $task->content = $request->content;
+        $task->save();
+
+        return redirect('/');
+    }
+
+    public function show($id)
+    {
+        $task = Task::find($id);
+
+        return view('task.show', [
+            'task' => $task,
+        ]);
+    }
+
+   public function edit($id)
+    {
+        $taskj = Task::find($id);
+
+        return view('tasks.edit', [
+            'task' => $task,
+        ]);
+    }
+
+   public function update(Request $request, $id)
+    {
+        $task = Task::find($id);
+        $task->content = $request->content;
+        $task->save();
+
+        return redirect('/');
+    }
+
+    public function destroy($id)
+    {
+        $task = Task::find($id);
+        $task->delete();
+
+        return redirect('/');
+    }
+}
