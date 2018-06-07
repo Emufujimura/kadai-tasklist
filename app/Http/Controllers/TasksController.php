@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Requests;
+
 use App\Task;    // add
 
 class TasksController extends Controller
@@ -34,7 +36,7 @@ class TasksController extends Controller
     {
         $task = new Task;
 
-        return view('task.create', [
+        return view('tasks.create', [
             'task' => $task,
         ]);
     }
@@ -52,14 +54,14 @@ class TasksController extends Controller
     {
         $task = Task::find($id);
 
-        return view('task.show', [
+        return view('tasks.show', [
             'task' => $task,
         ]);
     }
 
    public function edit($id)
     {
-        $taskj = Task::find($id);
+        $task = Task::find($id);
 
         return view('tasks.edit', [
             'task' => $task,
