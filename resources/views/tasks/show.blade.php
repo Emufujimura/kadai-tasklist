@@ -3,19 +3,29 @@
 @section('content')
 
     <h1>id = {{ $task->id }} のタスク詳細ページ</h1>
-
-    <p>ステータス: {{ $task->status }}</p>
-    <p>タスク: {{ $task->content }}</p>
-
+    <table class = "table table=bordered">
+    <tr>
+      <th>id</th>
+      <td>{{$task->id}}</td>
+    </tr> 
+    
+    <tr>
+      <th>ステータス</th>
+      <td>{{ $task->status }}</td> 
+    </tr>
+   
+   
+    <tr>
+      <th>タスク</th>
+      <td>{{ $task->content }}</td>
+    </tr> 
     {!! link_to_route('tasks.edit', 'このタスク編集', ['id' => $task->id]) !!}
 
     {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
         {!! Form::submit('削除') !!}
     {!! Form::close() !!}
 
-@endsection
-
-
+@endsectionS
 
 
 
